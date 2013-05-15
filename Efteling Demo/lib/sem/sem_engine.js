@@ -77,8 +77,8 @@ Sem_engine.prototype.buildView = function(viewName, callback, data){
 		$self.getPlaceholderElm(viewName).show();
 	}
 	
-	//var deviceHeight = screen.height;
-	//return $('html, body, div.placeholder').height(deviceHeight);
+	var deviceHeight = screen.height;
+	return $('html, body, div.placeholder').height(deviceHeight);
 }
 
 Sem_engine.prototype.renderPage = function(viewName, action){
