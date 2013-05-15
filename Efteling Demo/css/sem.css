@@ -1,0 +1,13 @@
+/* CSS crunched with Crunch - http://crunchapp.net/ */
+html, body {padding: 0px; margin: 0px;}
+div.page[name='MasterPage'] img{max-width:100% !important;display:block;}
+div.page[name='MasterPage'] div.placeholder[name='HomeView']{background-image:url('../img/app/Home_Paralax_Canvas.png');background-size:cover;}
+div.mainHeader{position:absolute;width:100%;}
+.home-button{display:inline-block;max-width:25%;}
+#efteling-btn{display:block;max-width:12%;margin:auto;}
+#experience-btn{display:block;max-width:34%;margin:auto;}
+#me-btn{margin-left:10%;}
+#favorites-btn{margin-left:35%;}
+#map-btn{margin-left:5%;}
+#stories-btn{margin-left:11%;}
+#pois-btn{margin-left:11%;}
