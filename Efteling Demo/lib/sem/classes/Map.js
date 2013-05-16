@@ -13,6 +13,8 @@ Map.prototype.initMap = function(){
 			say('start building');
 			buildMap();
 		});
+	} else {
+		buildMap();
 	}
 	
 	function buildMap(){

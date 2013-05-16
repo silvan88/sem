@@ -19,7 +19,7 @@ var Park = {
 	
 	doMore: function() {
 		map = new Map();
-        map.setLocation('51.649182', '5.027876');
+        map.setLocation(51.649182, 5.027876)
 		map.renderMap('MapView');
 	}
 }
