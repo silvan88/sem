@@ -76,9 +76,29 @@ Sem_engine.prototype.buildView = function(viewName, callback, data){
 		$(".placeholder").hide();
 		$self.getPlaceholderElm(viewName).show();
 	}
-	
-	var deviceHeight = screen.height;
-	return $('html, body, div.placeholder').height(deviceHeight);
+	var obj = $self.getWindowSizes();
+	return $('div.placeholder').height(obj.windowHeight);
+}
+
+Sem_engine.prototype.getWindowSizes = function() {
+	var obj = {
+		windowHeight : 0, 
+		windowWidth : 0
+	};
+
+	if (typeof (window.innerWidth) == 'number') {
+		obj.windowHeight = window.innerHeight;
+		obj.windowWidth = window.innerWidth;
+
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+		obj.windowHeight = document.documentElement.clientHeight;
+		obj.windowWidth = document.documentElement.clientWidth;
+
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+		obj.windowHeight = document.body.clientHeight;
+		obj.windowWidth = document.body.clientWidth;
+	}
+	return obj;
 }
 
 Sem_engine.prototype.renderPage = function(viewName, action){
