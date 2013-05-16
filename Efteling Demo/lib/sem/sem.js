@@ -31,6 +31,7 @@ function _startSem(){
 	registerEvents();
 	
 	//Call home controller
+	setWindowSizes();
 	Home.init();
 }
 
@@ -55,6 +56,38 @@ function registerEvents() {
 		});
 	}
 	$(window).on('hashchange', $.proxy(sem.route, this));
+}
+
+function setWindowSizes() {
+	window._deviceSize = {
+		windowHeight : 0, 
+		windowWidth : 0
+	};
+
+	if (typeof (window.innerWidth) == 'number') {
+		window._deviceSize.windowHeight = window.innerHeight;
+		window._deviceSize.windowWidth = window.innerWidth;
+
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+		window._deviceSize.windowHeight = document.documentElement.clientHeight;
+		window._deviceSize.windowWidth = document.documentElement.clientWidth;
+
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+		window._deviceSize.windowHeight = document.body.clientHeight;
+		window._deviceSize.windowWidth = document.body.clientWidth;
+	}
+}
+
+function getWindowSizes() {
+	return window._deviceSize;
+}
+
+function showAlert(message, title) {
+	if (navigator.notification) {
+		navigator.notification.alert(message, null, title, 'OK');
+	} else {
+		alert(title ? (title + ": " + message) : message);
+	}
 }
 
 function say(message) {

@@ -7,6 +7,8 @@ Map = function() {
 }
 
 Map.prototype.initMap = function(){
+	google.maps.visualRefresh = true;
+	
 	var $self = this;
 	if($self._location.latitude == undefined){
 		$.when($self.setLocation()).done(function(){
@@ -20,11 +22,10 @@ Map.prototype.initMap = function(){
 	function buildMap(){
 		$self.setGoogleMapsOptionsCenter($self._location);
 		$self._GoogleMapsOptions.disableDefaultUI = true;
-		$self.setGoogleMapsOptionsMapTypeId('roadmap');
+		$self.setGoogleMapsOptionsMapTypeId('hybrid');
 		var map = new google.maps.Map(document.getElementById("map-canvas"), $self._GoogleMapsOptions);
-		var deviceHeight = screen.height;
-		
-		return $('#map-canvas').height(deviceHeight);
+
+		return $('#map-canvas').height(getWindowSizes().windowHeight);
 	}
 }
 
@@ -39,7 +40,7 @@ Map.prototype.setNativeLocation = function(){
 	};
 	
 	function onError(error) {
-		sem.showAlert('Error getting location!');
+		showAlert('Error getting location!');
 		dfd.resolve();
 	};
 	
@@ -49,7 +50,7 @@ Map.prototype.setNativeLocation = function(){
 
 Map.prototype.renderMap = function(placeholderName) {
 	$(".placeholder[name='"+placeholderName+"'] .body").append('<div id="map-canvas" style="height: 100%; width: 100%;"></div>');
-	$.getScript("https://maps.google.com/maps/api/js?key=AIzaSyB0CEtmZFuFVvIALuKiXQz1suysUrHCrLU&sensor=false&callback=map.initMap");
+	$.getScript("https://maps.google.com/maps/api/js?v=3.12&key=AIzaSyB0CEtmZFuFVvIALuKiXQz1suysUrHCrLU&sensor=false&region=EU&callback=map.initMap");
 }
 
 /**
