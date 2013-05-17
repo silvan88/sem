@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config - Copy.xml" />
-    <Content Include="123config.xml" />
+    <Content Include="res\xml\config.xml" />
     <Content Include="controller\HomeController.js" />
     <Content Include="controller\MeController.js" />
     <Content Include="controller\ParkController.js" />
