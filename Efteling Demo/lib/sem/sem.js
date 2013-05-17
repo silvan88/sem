@@ -17,6 +17,7 @@ function _loadSem(){
 	    $.getScript("controller/ParkController.js"),
 	    $.getScript("controller/MeController.js"),
 	    $.getScript("controller/PoiController.js"),
+	    $.getScript("model/PoiModel.js"),
 	    $.Deferred(function( deferred ){
 	        $( deferred.resolve );
 	    })

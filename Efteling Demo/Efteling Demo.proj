@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="lib\sem\res\map\poi_marker_grey.png" />
     <Content Include="lib\sem\res\map\poi_marker_shadow.png" />
+    <Content Include="model\data\pois.json" />
+    <Content Include="model\PoiModel.js" />
     <Content Include="res\xml\config.xml" />
     <Content Include="controller\HomeController.js" />
     <Content Include="controller\MeController.js" />
