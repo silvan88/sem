@@ -10,7 +10,7 @@
     <AndroidPermissions>android.permission.CAMERA;android.permission.VIBRATE;android.permission.ACCESS_COARSE_LOCATION;android.permission.ACCESS_FINE_LOCATION;android.permission.ACCESS_LOCATION_EXTRA_COMMANDS;android.permission.READ_PHONE_STATE;android.permission.INTERNET;android.permission.RECEIVE_SMS;android.permission.RECORD_AUDIO;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.READ_CONTACTS;android.permission.WRITE_CONTACTS;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.ACCESS_NETWORK_STATE;android.permission.ACCOUNT_MANAGER;android.permission.GET_ACCOUNTS;android.permission.MANAGE_ACCOUNTS;android.permission.BROADCAST_STICKY</AndroidPermissions>
     <DeviceOrientations>Portrait</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
-    <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
+    <AndroidHardwareAcceleration>True</AndroidHardwareAcceleration>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="App_Resources" />
@@ -57,7 +57,8 @@
     <Resource Include="App_Resources\Android\drawable-ldpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config - Copy.xml" />
+    <Content Include="lib\sem\res\map\poi_marker_grey.png" />
+    <Content Include="lib\sem\res\map\poi_marker_shadow.png" />
     <Content Include="res\xml\config.xml" />
     <Content Include="controller\HomeController.js" />
     <Content Include="controller\MeController.js" />
@@ -75,7 +76,6 @@
     <Content Include="css\efteling.less" />
     <Content Include="css\sem.css" />
     <Content Include="css\sem.less" />
-    <Content Include="icon.png" />
     <Content Include="img\app\Alert_Ball_Icon.png" />
     <Content Include="img\app\crosshair_bttn.png" />
     <Content Include="img\app\Fav_Icon.png" />
@@ -101,7 +101,7 @@
     <Content Include="lib\sem\sem.js" />
     <Content Include="lib\sem\sem_engine.js" />
     <Content Include="view\HomeView.html" />
-    <Content Include="view\MapView.html" />
+    <Content Include="view\ParkView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

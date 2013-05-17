@@ -7,19 +7,17 @@
 
 var Park = {
 	init: function() {	
-		//Start here
-		
-		Park.render();
-		say('PARK CONTROLLER');
+		poiModel = new PoiModel(Park.render);
 	},
 	
 	render: function() {
-		sem.buildView('MapView', Park.doMore);
+		sem.buildView('ParkView', Park.doMore);
 	},
 	
 	doMore: function() {
 		map = new Map();
-        map.setLocation(51.649182, 5.027876)
-		map.renderMap('MapView');
+		map.setLocation(51.65005, 5.04768);
+		map.renderMap('ParkView');
+		map.setPoiMarkers(poiModel.getAllPois());
 	}
 }

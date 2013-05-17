@@ -22,6 +22,6 @@ var Home = {
 	},
 	
 	AlertTest: function(){
-		sem.showAlert('swipedUp!');
+		showAlert('swipedUp!');
 	}
 }
