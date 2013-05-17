@@ -18,10 +18,14 @@ var Home = {
 	},
 	
 	addSwipeEvent: function() {
-		$('body').bind('swipeup', Home.AlertTest); //show next hides screen1, shows screen2 
-	},
-	
-	AlertTest: function(){
-		showAlert('swipedUp!');
+        $elm = sem.getPlaceholderElm('HomeView');
+		
+        $elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
+			showAlert('swipedUp!');
+		});
+        
+        $elm.hammer({drag_max_touches:0}).on("swipedown", function(event) {
+			showAlert('swipedDown!');
+		});
 	}
 }

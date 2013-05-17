@@ -9,12 +9,10 @@ var sem;
  
 Sem_engine = function(eventName) {
 	this._eventName = eventName;
-	this._poiList = new Array();
-	this._pages = new Array();
-	this._placeHolders = new Array();
-	this._loadedTemplates = new Array();
-	this._navItems = new Array();
-	this._deviceSize = {};
+	this._poiList = [];
+	this._pages = [];
+	this._placeHolders = [];
+	this._loadedTemplates = [];
 	
 	$("head").append("<title>"+eventName+"</title>");
 }

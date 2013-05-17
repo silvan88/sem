@@ -16,8 +16,9 @@ var Park = {
 	
 	doMore: function() {
 		map = new Map();
-		map.setLocation(51.65005, 5.04768);
 		map.renderMap('ParkView');
+		map.setLocation(51.65005, 5.04768);
+		//map.setMapType('hybrid');
 		map.setPoiMarkers(poiModel.getAllPois());
 	}
 }

@@ -57,6 +57,7 @@
     <Resource Include="App_Resources\Android\drawable-ldpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\jquery.hammer.js" />
     <Content Include="lib\sem\res\map\poi_marker_grey.png" />
     <Content Include="lib\sem\res\map\poi_marker_shadow.png" />
     <Content Include="model\data\pois.json" />

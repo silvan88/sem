@@ -2,6 +2,7 @@ Map = function() {
 	this._map;
 	this._mapLocation = {};
 	this._mapImage;
+	this._mapType = 'roadmap';
 	this._GoogleMapsOptions = {
 		zoom: 15
 	};
@@ -15,6 +16,7 @@ Map = function() {
 }
 
 Map.prototype.renderMap = function(placeholderName) {
+	//$(".placeholder[name='"+placeholderName+"'] .body").append('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.nl/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=efteling&amp;aq=&amp;sll=51.98784,5.927553&amp;sspn=0.018474,0.052314&amp;t=h&amp;ie=UTF8&amp;hq=efteling&amp;hnear=&amp;ll=51.648027,5.043363&amp;spn=0.009306,0.026157&amp;z=14&amp;iwloc=A&amp;cid=4916763875931371674&amp;output=embed"></iframe><br /><small><a href="https://maps.google.nl/maps?f=q&amp;source=embed&amp;hl=nl&amp;geocode=&amp;q=efteling&amp;aq=&amp;sll=51.98784,5.927553&amp;sspn=0.018474,0.052314&amp;t=h&amp;ie=UTF8&amp;hq=efteling&amp;hnear=&amp;ll=51.648027,5.043363&amp;spn=0.009306,0.026157&amp;z=14&amp;iwloc=A&amp;cid=4916763875931371674" style="color:#0000FF;text-align:left">Grotere kaart weergeven</a></small>');
 	$(".placeholder[name='"+placeholderName+"'] .body").append('<div id="map-canvas" style="height: 100%; width: 100%;"></div>');
 	$.getScript("https://maps.google.com/maps/api/js?v=3.12&key=AIzaSyB0CEtmZFuFVvIALuKiXQz1suysUrHCrLU&sensor=false&region=EU&callback=map.initMap");
 }
@@ -35,7 +37,7 @@ Map.prototype.initMap = function(){
 	function buildMap(){
 		$self.setGoogleMapsOptionsCenter($self._mapLocation);
 		$self._GoogleMapsOptions.disableDefaultUI = true;
-		$self.setGoogleMapsOptionsMapTypeId('roadmap');
+		$self.setGoogleMapsOptionsMapTypeId($self._mapType);
 		$self._map = new google.maps.Map(document.getElementById("map-canvas"), $self._GoogleMapsOptions);
 		
 		google.maps.event.addListener($self._map, 'click', function() {
@@ -155,4 +157,7 @@ Map.prototype.setGoogleMapsOptionsCenter = function(location) {
 Map.prototype.setGoogleMapsOptionsMapTypeId = function(mapType) {
 	gMapTypeId = 'google.maps.MapTypeId.'+mapType.toUpperCase();
 	return this._GoogleMapsOptions.mapTypeId = eval(gMapTypeId);
+}
+Map.prototype.setMapType = function(mapType){
+	return this._mapType = mapType;
 }
