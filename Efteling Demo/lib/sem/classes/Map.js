@@ -35,7 +35,7 @@ Map.prototype.initMap = function(){
 	function buildMap(){
 		$self.setGoogleMapsOptionsCenter($self._mapLocation);
 		$self._GoogleMapsOptions.disableDefaultUI = true;
-		$self.setGoogleMapsOptionsMapTypeId('hybrid');
+		$self.setGoogleMapsOptionsMapTypeId('roadmap');
 		$self._map = new google.maps.Map(document.getElementById("map-canvas"), $self._GoogleMapsOptions);
 		
 		google.maps.event.addListener($self._map, 'click', function() {
