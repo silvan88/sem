@@ -2,7 +2,39 @@
     <div class='header'>
 	</div>
 	<div class='body'>
+		<div id='pois-detailScreen'>
+			{{>tpl-pois-detailScreen}}
+		</div>
 	</div>
 	<div class='footer'>
 	</div>
+</script>
+
+<script id='tpl-pois-detailScreen' type='text/html'>
+	{{#pois}}
+		<div class='poi' id='pois-detailScreen-{{id}}'>
+			<div class='pois-detailScreen-header'>
+				<img class='background-image' src='img/app/poi/detailScreen-header.png' alt='background' />
+				<div class='header-content'>
+					<h1>{{name}}</h1>
+					<div class='pois-detailScreen-close'></div>
+				</div>
+			</div>
+			<div class='pois-detailScreen-body'>
+				<img class='background-image' src='img/app/poi/detailScreen-body.png' alt='background' />
+				<div class='body-content'>
+					<p>
+						ID: {{id}}<br/>
+						Category: {{category}}<br/>
+						Name: {{name}}
+					</p>
+					<p>
+						Location-latitude: {{location.latitude}}<br/>
+						Location-longitude: {{location.longitude}}<br/>
+						Members: {{members}}
+					</p>
+				</div>
+			</div>
+		</div>
+	{{/pois}}
 </script>

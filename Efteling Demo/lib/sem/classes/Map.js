@@ -13,6 +13,7 @@ Map = function() {
 		marker: 'default',
 		shadow: 'no'
 	};
+	this._poiOnclick;
 }
 
 Map.prototype.renderMap = function(placeholderName) {
@@ -51,9 +52,7 @@ Map.prototype.initMap = function(){
 		$.each($self._poiList, function(nr, obj){
 			$self.createMarker(obj.location.latitude, obj.location.longitude, obj.name, obj.id, $self._poiMarkerOptions);
 		});
-		
-		//$self._map.addMarkers($self._poiMarkers, true);
-		
+				
 		return $('#map-canvas').height(getWindowSizes().windowHeight);
 	}
 }
@@ -65,8 +64,9 @@ Map.prototype.initMap = function(){
 Map.prototype.getPoiMarkers = function() {
 	return this._poiMarkers;
 }
-Map.prototype.setPoiMarkers = function(pois) {
-	return this._poiList = pois;	
+Map.prototype.setPoiMarkers = function(data, onclick) {
+	this._poiOnclick = onclick;
+	return this._poiList = data.pois;	
 }
 Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIconOptions) {
 	var $self = this, contentString = myTitle, latlng = new google.maps.LatLng(latitude, longitude), icon = '';
@@ -90,12 +90,15 @@ Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIco
         map: $self._map,
         icon: myIcon,
         zIndex: Math.round(latlng.lat() * -100000) << 5,
-        title: myTitle
+        title: myTitle,
+		id: myNum
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        $self._infowindow.setContent(contentString);
-        $self._infowindow.open($self._map, marker);
+        //$self._infowindow.setContent(contentString);
+        //$self._infowindow.open($self._map, marker);
+		
+		$self._poiOnclick(this);
     });
 
     return $self._poiMarkers.push(marker); //push local var marker into global array

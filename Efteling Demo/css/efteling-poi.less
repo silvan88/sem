@@ -1,0 +1,43 @@
+#pois-detailScreen {
+    display: none;
+    background: rgba(0, 0, 0, 0.80);
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    .poi {
+        display: none;
+        z-index: 101;
+        margin: 10% auto;
+        width: 80%;
+        .pois-detailScreen-header {
+            .header-content {
+                margin: -14% auto;
+                position: absolute;
+                text-align: center;
+                width: 80%;
+                z-index: 200;
+                font-size: 2.7vw;
+                h1 {
+                    width: 70%;
+                    margin: 5% auto;
+                }
+            }
+            .pois-detailScreen-close{
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 15%;
+                cursor: pointer;
+            }
+        }
+        .pois-detailScreen-body {
+            //background-image: url('../img/app/poi/detailScreen-body.png');
+           // width: 80%;
+            //height: 80%;
+            //background-size: cover;
+            //margin: auto;
+        }
+    }
+}
