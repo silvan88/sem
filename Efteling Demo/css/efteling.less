@@ -1,3 +1,14 @@
+html, body {
+    padding: 0px; 
+    margin: 0px;
+    overflow: hidden;
+}
+
+.background-image {
+    max-width: 100% !important;
+    display: block;
+}
+
 div.page[name='MasterPage']{
     img{
         max-width: 100% !important;
@@ -6,11 +17,26 @@ div.page[name='MasterPage']{
     div.placeholder[name='HomeView']{
         background-image: url('../img/app/Home_Paralax_Canvas.png');
         background-size: cover;
+        div.body{
+            padding-top: 50%;
+        }
     }
     div.header[name='MasterPage']{
         position: relative;
         width: 100%;
     }
+    div.placeholder {
+        div.body {
+            height: 100%;
+        }
+    }
+}
+
+div#mainHeader{
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    padding-top: 10px;
 }
 
 .home-button{
@@ -31,17 +57,18 @@ div.page[name='MasterPage']{
 }
 
 #me-btn{
-    margin-left: 10%;
+    margin: auto auto -10%  10%;
 }
 #favorites-btn{
-   margin-left: 35%;
+   margin: auto auto -10% 30%;
 }
 #map-btn{
-    margin-left: 5%;
+    margin: -10% auto auto 5%;
 }
 #stories-btn{
-    margin-left: 11%;
+    margin: -10% auto;
+    display: block;
 }
 #pois-btn{
-    margin-left: 11%;
+    margin: -10% auto auto 40%;
 }
