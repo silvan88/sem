@@ -22,5 +22,5 @@ PoiModel = function(callback) {
 }
 
 PoiModel.prototype.getAllPois = function() {
-	return this._poisList.pois;
+	return this._poisList;
 }

@@ -17,7 +17,6 @@ Map = function() {
 }
 
 Map.prototype.renderMap = function(placeholderName) {
-	//$(".placeholder[name='"+placeholderName+"'] .body").append('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.nl/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=efteling&amp;aq=&amp;sll=51.98784,5.927553&amp;sspn=0.018474,0.052314&amp;t=h&amp;ie=UTF8&amp;hq=efteling&amp;hnear=&amp;ll=51.648027,5.043363&amp;spn=0.009306,0.026157&amp;z=14&amp;iwloc=A&amp;cid=4916763875931371674&amp;output=embed"></iframe><br /><small><a href="https://maps.google.nl/maps?f=q&amp;source=embed&amp;hl=nl&amp;geocode=&amp;q=efteling&amp;aq=&amp;sll=51.98784,5.927553&amp;sspn=0.018474,0.052314&amp;t=h&amp;ie=UTF8&amp;hq=efteling&amp;hnear=&amp;ll=51.648027,5.043363&amp;spn=0.009306,0.026157&amp;z=14&amp;iwloc=A&amp;cid=4916763875931371674" style="color:#0000FF;text-align:left">Grotere kaart weergeven</a></small>');
 	$(".placeholder[name='"+placeholderName+"'] .body").append('<div id="map-canvas" style="height: 100%; width: 100%;"></div>');
 	$.getScript("https://maps.google.com/maps/api/js?v=3.12&key=AIzaSyB0CEtmZFuFVvIALuKiXQz1suysUrHCrLU&sensor=false&region=EU&callback=map.initMap");
 }
@@ -66,7 +65,7 @@ Map.prototype.getPoiMarkers = function() {
 }
 Map.prototype.setPoiMarkers = function(data, onclick) {
 	this._poiOnclick = onclick;
-	return this._poiList = data.pois;	
+	return this._poiList = data.pois;
 }
 Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIconOptions) {
 	var $self = this, contentString = myTitle, latlng = new google.maps.LatLng(latitude, longitude), icon = '';
@@ -82,8 +81,6 @@ Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIco
 	}
 	
 	myIcon += '.png';
-	
-	say(myIcon);
 	
 	var marker = new google.maps.Marker({
         position: latlng,

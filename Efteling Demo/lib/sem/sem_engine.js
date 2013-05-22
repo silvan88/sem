@@ -17,6 +17,14 @@ Sem_engine = function(eventName) {
 	$("head").append("<title>"+eventName+"</title>");
 }
 
+Sem_engine.prototype.isConnected = function() {
+    var networkState = navigator.network.connection.type;
+	if(networkState === Connection.NONE) {
+		return false;
+    } else {
+        return true;
+    }
+}
 Sem_engine.prototype.back = function() {
 	if(navigator.app) {
 		if($(".placeholder[name='HomeView']").css('display') == 'block'){

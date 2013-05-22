@@ -1,5 +1,6 @@
 <script id='tpl-HomeView' type='text/html'>
     <div class='header'>
+		{{>tpl-HomeTopView}}
 	</div>
 	<div class='body'>
 		<a href='#Me' class='home-button' id='me-btn'>
@@ -25,16 +26,24 @@
 	</div>
 </script>
 
-<script id='tpl-HomeUpView' type='text/html'>
-    <div class='header'>
-	</div>
-	<div class='body'>
-	</div>
-	<div class='footer'>
+<script id='tpl-HomeTopView' type='text/html'>
+    <div id='homeTopView'>
+		<a href='#Photo/takePicture' class='homeTopView-button' id='photo_btn'>
+			<img src='img/app/photo_bttn.png' />
+		</a>
+		<a href='#Me/shareItem' class='homeTopView-button' id='share_btn'>
+			<img src='img/app/share_bttn.png' />
+		</a>
+		<a href='#Park/render' class='homeTopView-button' id='crosshair_btn'>
+			<img src='img/app/crosshair_bttn.png' />
+		</a>
+		<a href='#Poi/waitingLines' class='homeTopView-button' id='waitingLines_btn'>
+			<img src='img/app/waitingLines_bttn.png' />
+		</a>
 	</div>
 </script>
 
-<script id='tpl-HomeDownView' type='text/html'>
+<script id='tpl-HomeBottomView' type='text/html'>
     <div class='header'>
 	</div>
 	<div class='body'>
