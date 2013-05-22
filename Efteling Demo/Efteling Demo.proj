@@ -60,6 +60,8 @@
     <Content Include="css\efteling-poi.less" />
     <Content Include="img\app\poi\detailScreen-body.png" />
     <Content Include="img\app\poi\detailScreen-header.png" />
+    <Content Include="img\app\topDownBgRed_canvas.png" />
+    <Content Include="img\app\waitingLines_bttn.png" />
     <Content Include="lib\jquery.hammer.js" />
     <Content Include="lib\sem\res\map\poi_marker_grey.png" />
     <Content Include="lib\sem\res\map\poi_marker_shadow.png" />
