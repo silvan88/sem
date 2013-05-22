@@ -5,12 +5,14 @@
  * Class description
  */
 sem = new Sem_engine("Efteling - Demo");
-
 var Home = {
 	init: function(){	
 		//Start here
 		
 		Home.render();
+        document.body.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+        }, false); 
 	},
 	
 	render: function(){
@@ -18,42 +20,25 @@ var Home = {
 	},
 	
 	addSwipeEvent: function(){
-        $elm = sem.getPlaceholderElm('HomeView');
-		
         $elm.hammer({drag_max_touches:0}).on("swipedown", function(event) {
-			Home.showTopMenu($elm);
+			var height = $('#homeTopView').css('height');
+			$('#homeTopView').css({'margin-top' : '-'+height, 'display' : 'block'});
+			Home.showTopMenu($elm, height);
 		});
 	},
 	
-	showTopMenu: function($elm){
-		
-		/* $('#homeTopView').transition({marginTop:'0px'}, function(){
-			$elm = sem.getPlaceholderElm('HomeView');
+	showTopMenu: function($elm, height){
+		$elm.transition({marginTop:height}, function(){
 			$elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
-				Home.hideTopMenu();
-			});
-		}); */
-		
-		$elm.transition({marginTop:'23%'}, function(){
-			//$elm = sem.getPlaceholderElm('HomeView');
-			$elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
-				Home.hideTopMenu($elm);
+				Home.hideTopMenu($elm, height);
 			});
 		});
 	},
 	
-	hideTopMenu: function($elm){
-		/* $('#homeTopView').transition({marginTop:'-24%'}, function(){
-			$elm = sem.getPlaceholderElm('HomeView');
-			$elm.hammer({drag_max_touches:0}).on("swipedown", function(event) {
-				Home.showTopMenu();
-			});
-		}); */
-		
+	hideTopMenu: function($elm, height){
 		$elm.transition({marginTop:'0px'}, function(){
-			//$elm = sem.getPlaceholderElm('HomeView');
 			$elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
-				Home.hideTopMenu($elm);
+				Home.hideTopMenu($elm, height);
 			});
 		});
 	}
