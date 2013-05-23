@@ -20,11 +20,21 @@
 	
 	<!-- JS includes -->
 	<script type="text/javascript" src="cordova.js"></script>
-	<script type="text/javascript" src="lib/mustache.js"></script>
 	<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="lib/jquery.mustache.js"></script>
-	<script type="text/javascript" src="lib/jquery.hammer.js"></script>
-	<script type="text/javascript" src="lib/jquery.transit.min.js"></script>
 	<script type="text/javascript" src="lib/sem/sem.js"></script>
+	<script type="text/javascript">
+		initSem({
+			'eventName': 'Efteling - Demo', 
+			'controllers': [
+				{'name': 'HomeController'},
+				{'name': 'MeController'},
+				{'name': 'ParkController'},
+				{'name': 'PoiController'}
+			],
+			'models': [
+				{'name': 'PoiModel'}
+			]
+		});
+	</script>
 </body>
 </html>

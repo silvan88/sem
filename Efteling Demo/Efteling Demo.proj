@@ -62,8 +62,8 @@
     <Content Include="img\app\poi\detailScreen-header.png" />
     <Content Include="img\app\topDownBgRed_canvas.png" />
     <Content Include="img\app\waitingLines_bttn.png" />
-    <Content Include="lib\jquery.hammer.js" />
-    <Content Include="lib\jquery.transit.min.js" />
+    <Content Include="lib\sem\lib\jquery.hammer.js" />
+    <Content Include="lib\sem\lib\jquery.transit.min.js" />
     <Content Include="lib\sem\res\map\poi_marker_grey.png" />
     <Content Include="lib\sem\res\map\poi_marker_shadow.png" />
     <Content Include="model\data\pois.json" />
@@ -99,8 +99,8 @@
     <Content Include="img\app\StoryBook_Icon.png" />
     <Content Include="index.html" />
     <Content Include="lib\jquery-1.7.2.min.js" />
-    <Content Include="lib\jquery.mustache.js" />
-    <Content Include="lib\mustache.js" />
+    <Content Include="lib\sem\lib\jquery.mustache.js" />
+    <Content Include="lib\sem\lib\mustache.js" />
     <Content Include="lib\sem\classes\Album.js" />
     <Content Include="lib\sem\classes\Calendar.js" />
     <Content Include="lib\sem\classes\Map.js" />

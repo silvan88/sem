@@ -4,15 +4,11 @@
  * @class
  * Class description
  */
-sem = new Sem_engine("Efteling - Demo");
 var Home = {
 	init: function(){	
 		//Start here
 		
 		Home.render();
-        document.body.addEventListener('touchmove', function(event) {
-            event.preventDefault();
-        }, false); 
 	},
 	
 	render: function(){
@@ -20,25 +16,32 @@ var Home = {
 	},
 	
 	addSwipeEvent: function(){
-        $elm.hammer({drag_max_touches:0}).on("swipedown", function(event) {
-			var height = $('#homeTopView').css('height');
-			$('#homeTopView').css({'margin-top' : '-'+height, 'display' : 'block'});
-			Home.showTopMenu($elm, height);
+		var $elm = sem.getPlaceholderElm('HomeView');
+		
+		sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
+			sem.unbindEvent($elm, 'swipedown');
+			Home.showTopMenu($elm);
 		});
 	},
 	
-	showTopMenu: function($elm, height){
+	showTopMenu: function($elm){
+		var height = $('#homeTopView').css('height');
+		$('#homeTopView').css({'margin-top' : '-'+height, 'display' : 'block'});
+		
 		$elm.transition({marginTop:height}, function(){
-			$elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
-				Home.hideTopMenu($elm, height);
+			sem.addEvent($elm, {event: 'swipeup', max_touches: 0}, function(){
+				sem.unbindEvent($elm, 'swipeup');
+				Home.hideTopMenu($elm);
 			});
 		});
 	},
 	
-	hideTopMenu: function($elm, height){
+	hideTopMenu: function($elm){		
 		$elm.transition({marginTop:'0px'}, function(){
-			$elm.hammer({drag_max_touches:0}).on("swipeup", function(event) {
-				Home.hideTopMenu($elm, height);
+			$('#homeTopView').css({'display' : 'none'});
+			sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
+				sem.unbindEvent($elm, 'swipedown');
+				Home.showTopMenu($elm);
 			});
 		});
 	}
