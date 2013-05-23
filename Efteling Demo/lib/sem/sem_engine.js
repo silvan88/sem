@@ -5,27 +5,101 @@
  * @class
  * Class description
  */
-var sem;
- 
-Sem_engine = function(eventName) {
-	this._eventName = eventName;
+
+Sem_engine = function(eventName) {	
 	this._poiList = [];
 	this._pages = [];
 	this._placeHolders = [];
 	this._loadedTemplates = [];
 	
-	$("head").append("<title>"+eventName+"</title>");
+	eventName == "" ? this._eventName = eventName : this._eventName = 'SEM Event';
+
+	$("head").append("<title>"+this._eventName+"</title>");
 }
 
-Sem_engine.prototype.isConnected = function() {
-    var networkState = navigator.network.connection.type;
-	if(networkState === Connection.NONE) {
-		return false;
-    } else {
-        return true;
-    }
+Sem_engine.prototype.addTransition = function(){
+	//import transition
 }
-Sem_engine.prototype.back = function() {
+
+Sem_engine.prototype.addEvent = function($elm, options, func){
+	var defaultOptions = {
+		max_touches: 0,
+		event: 'tap'
+	}
+	
+	if (typeof options == 'object') {
+		options = $.extend(defaultOptions, options);
+	} else {
+		options = defaultOptions;
+	}
+	
+	$elm.hammer({drag_max_touches:options.max_touches}).on(options.event, func);
+}
+Sem_engine.prototype.unbindEvent = function($elm, event){
+	$elm.unbind(event);
+}
+
+Sem_engine.prototype.registerEvents = function(){
+	var $self = this;
+	// Check of browser supports touch events...
+	if (document.documentElement.hasOwnProperty('ontouchstart')) {
+		// ... if yes: register touch event listener to change the "selected" state of the item
+		$('body').on('touchstart', 'a', function(event) {
+			$(event.target).addClass('tappable-active');
+		});
+		$('body').on('touchend', 'a', function(event) {
+			$(event.target).removeClass('tappable-active');
+		});
+	} else {
+		// ... if not: register mouse events instead
+		$('body').on('mousedown', 'a', function(event) {
+			$(event.target).addClass('tappable-active');
+		});
+		$('body').on('mouseup', 'a', function(event) {
+			$(event.target).removeClass('tappable-active');
+		});
+	}
+	$(window).on('hashchange', $.proxy($self.route, this));
+}
+Sem_engine.prototype.setWindowSizes = function(){
+	window._deviceSize = {
+		windowHeight : 0, 
+		windowWidth : 0
+	};
+
+	if (typeof (window.innerWidth) == 'number') {
+		window._deviceSize.windowHeight = window.innerHeight;
+		window._deviceSize.windowWidth = window.innerWidth;
+
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+		window._deviceSize.windowHeight = document.documentElement.clientHeight;
+		window._deviceSize.windowWidth = document.documentElement.clientWidth;
+
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+		window._deviceSize.windowHeight = document.body.clientHeight;
+		window._deviceSize.windowWidth = document.body.clientWidth;
+	}
+}
+Sem_engine.prototype.getWindowSizes = function(){
+	return window._deviceSize;
+}
+
+Sem_engine.prototype.showAlert = function(message, title){
+	if (navigator.notification) {
+		navigator.notification.alert(message, null, title, 'OK');
+	} else {
+		alert(title ? (title + ": " + message) : message);
+	}
+}
+Sem_engine.prototype.say = function(message){
+	console.log("SEM: "+message);
+}
+Sem_engine.prototype.extend = function(ChildClass, ParentClass){
+	ChildClass.prototype = new ParentClass();
+	ChildClass.prototype.constructor = ChildClass;
+}
+
+Sem_engine.prototype.back = function(){
 	if(navigator.app) {
 		if($(".placeholder[name='HomeView']").css('display') == 'block'){
 			//To exit the application:
@@ -38,7 +112,7 @@ Sem_engine.prototype.back = function() {
 		return history.back();
 	}
 }
-Sem_engine.prototype.route = function() {
+Sem_engine.prototype.route = function(){
 	var hash = window.location.hash;
 	if (!hash) {
 		sem.goTo('Home', 'init');
@@ -74,30 +148,9 @@ Sem_engine.prototype.buildView = function(viewName, callback, data){
 		$self.getPlaceholderElm(viewName).show();
 	}
 
-	return $('div.placeholder').height(getWindowSizes().windowHeight);
+	return $('div.placeholder').height($self.getWindowSizes().windowHeight);
 }
-Sem_engine.prototype.renderPage = function(viewName, action){
-	var $self = this;
-	$.when( $self.buildView(viewName) ).done(function(){
-		//eval(action+"()");
-		$self.view(viewName);
-	});
-}
-Sem_engine.prototype.renderPartial = function(data, template, location){
-	var $self = this;
-	$.Mustache.load('view/'+template+'.html').done(function () {
-		var $elm = $self.getPlaceholderElm(location);
-		//RELOAD PROTECT INBOUWEN
-			$elm.empty();
-		//RELOAD PROTECT INBOUWEN
-		$elm.mustache('tpl-'+template, data);
-	});
-}
-Sem_engine.prototype.show = function(name) {
-	$(".placeholder").hide();
-	$(".placeholder[name='"+name+"']").show();
-}
-Sem_engine.prototype.goTo = function(controller, action, name) {
+Sem_engine.prototype.goTo = function(controller, action, name){
 	//BETERE FUNCTIE
 	if(action == undefined){
 		eval(controller+".init()");
@@ -105,11 +158,15 @@ Sem_engine.prototype.goTo = function(controller, action, name) {
 		eval(controller+"."+action+"()");
 	}
 }
+Sem_engine.prototype.show = function(name) {
+	$(".placeholder").hide();
+	$(".placeholder[name='"+name+"']").show();
+}
 
-Sem_engine.prototype.getPlaceholders = function() {
+Sem_engine.prototype.getPlaceholders = function(){
 	return this._placeHolders;
 }
-Sem_engine.prototype.setPlaceholderStatus = function(placeholderName, status) {
+Sem_engine.prototype.setPlaceholderStatus = function(placeholderName, status){
 	$.each(this._placeHolders, function(key, obj){
 		if(obj.placeholder == placeholderName){
 			obj.loaded = status;
@@ -117,14 +174,14 @@ Sem_engine.prototype.setPlaceholderStatus = function(placeholderName, status) {
 		}
 	});
 }
-Sem_engine.prototype.addPlaceholder = function(placeholderName, status) {
+Sem_engine.prototype.addPlaceholder = function(placeholderName, status){
 	var obj = { 
 		"placeholder" : placeholderName,
 		"loaded" : status
 	}
 	this._placeHolders.push(obj);
 }
-Sem_engine.prototype.checkPlaceholderView = function(viewName) {
+Sem_engine.prototype.checkPlaceholderView = function(viewName){
 	var check = false;
 	$.each(this._placeHolders, function(nr, obj){
 		if(obj.placeholder == viewName){
@@ -133,6 +190,6 @@ Sem_engine.prototype.checkPlaceholderView = function(viewName) {
 	});
 	return check;
 }
-Sem_engine.prototype.getPlaceholderElm = function(placeholderName) {
+Sem_engine.prototype.getPlaceholderElm = function(placeholderName){
 	return $(".placeholder[name='"+placeholderName+"']");
 }

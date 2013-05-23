@@ -3,9 +3,10 @@ Me = function() {
 	this._favorites = [];
 	this.calendar = new Calendar();
 	this.album = new Album();
+	
+	sem.extend(Me, Profile);
 }
 
-extend(Me, Profile);
 
 Me.prototype.initMe = function() {
 	return say('initMe');

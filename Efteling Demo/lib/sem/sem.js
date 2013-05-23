@@ -1,101 +1,74 @@
 /*! SEM - Smart Event Mobility v0.1 capgemini.com | capgemini.com/sem/license */
+var sem;
 
-//Load SEM
-_loadSem();
+function initSem(options){
+	var defaultOptions = {
+		'eventName': 'SEM event', 
+		'controllers': [
+			{'name': 'HomeController'}
+		],
+		'models': [
+			{'name': 'PoiModel'}
+		]
+	}
+	
+	if (typeof options == 'object') {
+		options = $.extend(defaultOptions, options);
+	} else {
+		options = defaultOptions;
+	}
+	
+	_loadSem(options);
+}
 
-function _loadSem(){
-	say("Initializing SEM...");
+function _loadSem(options){
 	$.when(
+		$.getScript("lib/sem/lib/mustache.js"),
+		$.getScript("lib/sem/lib/jquery.mustache.js"),
+		$.getScript("lib/sem/lib/jquery.hammer.js"),
+		$.getScript("lib/sem/lib/jquery.transit.min.js"),
 	    $.getScript("lib/sem/sem_engine.js"),
-	    $.getScript("lib/sem/classes/Map.js"),
 	    $.getScript("lib/sem/classes/Album.js"),
 	    $.getScript("lib/sem/classes/Calendar.js"),
 	    $.getScript("lib/sem/classes/Profile.js"),
+		$.getScript("lib/sem/classes/Map.js"),
 	    $.getScript("lib/sem/classes/Me.js"),
 	    $.getScript("lib/sem/classes/Poi.js"),
-	    $.getScript("controller/HomeController.js"),
-	    $.getScript("controller/ParkController.js"),
-	    $.getScript("controller/MeController.js"),
-	    $.getScript("controller/PoiController.js"),
-	    $.getScript("model/PoiModel.js"),
+		_loadControllers(options.controllers),
+		_loadModels(options.models),
 	    $.Deferred(function( deferred ){
 	        $( deferred.resolve );
 	    })
 	).done(function(){
-		say("SEM 2.0 initialized, starting SEM...");
+		sem = new Sem_engine(options.eventName);
+		sem.say("SEM initialized, starting SEM...");
 		_startSem();
 	});
 }
 
+function _loadControllers(controllers){
+	var dfd = $.Deferred();
+	$.each(controllers, function(k, controller){
+		$.getScript("controller/"+controller.name+".js");
+		dfd.resolve();
+	});
+	return dfd.promise();
+}
+
+function _loadModels(models){
+	var dfd = $.Deferred();
+	$.each(models, function(k, model){
+		$.getScript("model/"+model.name+".js");
+		dfd.resolve();
+	});
+	return dfd.promise();
+}
+
 function _startSem(){
-	say("SEM started!");
-	registerEvents();
+	sem.registerEvents();
+	sem.setWindowSizes();
 	
 	//Call home controller
-	setWindowSizes();
 	Home.init();
-}
-
-function registerEvents() {
-	var self = this;
-	// Check of browser supports touch events...
-	if (document.documentElement.hasOwnProperty('ontouchstart')) {
-		// ... if yes: register touch event listener to change the "selected" state of the item
-		$('body').on('touchstart', 'a', function(event) {
-			$(event.target).addClass('tappable-active');
-		});
-		$('body').on('touchend', 'a', function(event) {
-			$(event.target).removeClass('tappable-active');
-		});
-	} else {
-		// ... if not: register mouse events instead
-		$('body').on('mousedown', 'a', function(event) {
-			$(event.target).addClass('tappable-active');
-		});
-		$('body').on('mouseup', 'a', function(event) {
-			$(event.target).removeClass('tappable-active');
-		});
-	}
-	$(window).on('hashchange', $.proxy(sem.route, this));
-}
-
-function setWindowSizes() {
-	window._deviceSize = {
-		windowHeight : 0, 
-		windowWidth : 0
-	};
-
-	if (typeof (window.innerWidth) == 'number') {
-		window._deviceSize.windowHeight = window.innerHeight;
-		window._deviceSize.windowWidth = window.innerWidth;
-
-	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-		window._deviceSize.windowHeight = document.documentElement.clientHeight;
-		window._deviceSize.windowWidth = document.documentElement.clientWidth;
-
-	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-		window._deviceSize.windowHeight = document.body.clientHeight;
-		window._deviceSize.windowWidth = document.body.clientWidth;
-	}
-}
-
-function getWindowSizes() {
-	return window._deviceSize;
-}
-
-function showAlert(message, title) {
-	if (navigator.notification) {
-		navigator.notification.alert(message, null, title, 'OK');
-	} else {
-		alert(title ? (title + ": " + message) : message);
-	}
-}
-
-function say(message) {
-	console.log("SEM 2.0: "+message);
-}
-
-function extend(ChildClass, ParentClass) {
-	ChildClass.prototype = new ParentClass();
-	ChildClass.prototype.constructor = ChildClass;
+	sem.say("SEM started!");
 }

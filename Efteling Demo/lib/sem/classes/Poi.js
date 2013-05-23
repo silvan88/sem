@@ -2,9 +2,10 @@ Poi = function(name) {
 	this.setName(name);
 	this._category;
 	this._members = {};
+	
+	sem.extend(Poi, Profile);
 }
 
-extend(Poi, Profile);
 
 Poi.prototype.initPoi = function() {
 	return say('initPoi');
