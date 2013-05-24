@@ -41,6 +41,7 @@ Sem_engine.prototype.unbindEvent = function($elm, event){
 
 Sem_engine.prototype.registerEvents = function(){
 	var $self = this;
+	var dfd = $.Deferred();
 	// Check of browser supports touch events...
 	if (document.documentElement.hasOwnProperty('ontouchstart')) {
 		// ... if yes: register touch event listener to change the "selected" state of the item
@@ -50,6 +51,7 @@ Sem_engine.prototype.registerEvents = function(){
 		$('body').on('touchend', 'a', function(event) {
 			$(event.target).removeClass('tappable-active');
 		});
+		dfd.resolve();
 	} else {
 		// ... if not: register mouse events instead
 		$('body').on('mousedown', 'a', function(event) {
@@ -58,10 +60,14 @@ Sem_engine.prototype.registerEvents = function(){
 		$('body').on('mouseup', 'a', function(event) {
 			$(event.target).removeClass('tappable-active');
 		});
+		dfd.resolve();
 	}
 	$(window).on('hashchange', $.proxy($self.route, this));
+	return dfd.promise();
 }
 Sem_engine.prototype.setWindowSizes = function(){
+	var dfd = $.Deferred();
+	
 	window._deviceSize = {
 		windowHeight : 0, 
 		windowWidth : 0
@@ -70,15 +76,20 @@ Sem_engine.prototype.setWindowSizes = function(){
 	if (typeof (window.innerWidth) == 'number') {
 		window._deviceSize.windowHeight = window.innerHeight;
 		window._deviceSize.windowWidth = window.innerWidth;
+		dfd.resolve();
 
 	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
 		window._deviceSize.windowHeight = document.documentElement.clientHeight;
 		window._deviceSize.windowWidth = document.documentElement.clientWidth;
+		dfd.resolve();
 
 	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
 		window._deviceSize.windowHeight = document.body.clientHeight;
 		window._deviceSize.windowWidth = document.body.clientWidth;
+		dfd.resolve();
 	}
+	
+	return dfd.promise();
 }
 Sem_engine.prototype.getWindowSizes = function(){
 	return window._deviceSize;

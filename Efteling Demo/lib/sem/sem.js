@@ -18,16 +18,16 @@ function initSem(options){
 		options = defaultOptions;
 	}
 	
-	_loadSem(options);
+    return document.addEventListener("deviceready", _loadSem(options), false);
 }
 
 function _loadSem(options){
 	$.when(
+	    $.getScript("lib/sem/sem_engine.js"),
 		$.getScript("lib/sem/lib/mustache.js"),
 		$.getScript("lib/sem/lib/jquery.mustache.js"),
 		$.getScript("lib/sem/lib/jquery.hammer.js"),
 		$.getScript("lib/sem/lib/jquery.transit.min.js"),
-	    $.getScript("lib/sem/sem_engine.js"),
 	    $.getScript("lib/sem/classes/Album.js"),
 	    $.getScript("lib/sem/classes/Calendar.js"),
 	    $.getScript("lib/sem/classes/Profile.js"),
@@ -41,37 +41,39 @@ function _loadSem(options){
 	    })
 	).done(function(){
 		sem = new Sem_engine(options.eventName);
-		sem.say("SEM initialized, starting SEM...");
-        sem.showAlert('Done loading! Starting SEM');
 		_startSem();
 	});
 }
 
 function _loadControllers(controllers){
-	var dfd = $.Deferred();
-	$.each(controllers, function(k, controller){
-		$.getScript("controller/"+controller.name+".js");
+	var dfd = $.Deferred(), getScriptReqs = [];
+	
+	for (var i = 0; i<controllers.length; i++) {
+		getScriptReqs.push($.getScript("controller/"+controllers[i].name+".js"));
+	}
+	$.when.apply($, getScriptReqs).then(function() {
 		dfd.resolve();
 	});
-    sem.showAlert('Controllers loaded!');
+	
 	return dfd.promise();
 }
 
 function _loadModels(models){
-	var dfd = $.Deferred();
-	$.each(models, function(k, model){
-		$.getScript("model/"+model.name+".js");
+	var dfd = $.Deferred(), getScriptReqs = [];
+	
+	for (var i = 0; i<models.length; i++) {
+		getScriptReqs.push($.getScript("model/"+models[i].name+".js"));
+	}
+	$.when.apply($, getScriptReqs).then(function() {
 		dfd.resolve();
 	});
-    sem.showAlert('Models loaded!');
+	
 	return dfd.promise();
 }
 
 function _startSem(){
-	sem.registerEvents();
-	sem.setWindowSizes();
-	
-	//Call home controller
-	Home.init();
-	sem.say("SEM started!");
+	$.when(sem.registerEvents(), sem.setWindowSizes()).done(function(){
+        //Call home controller
+		Home.init();
+	});
 }
