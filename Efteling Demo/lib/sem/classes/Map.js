@@ -28,7 +28,6 @@ Map.prototype.initMap = function(){
 	
 	if($self._mapLocation.latitude == undefined){
 		$.when($self.setLocation()).done(function(){
-			say('start building');
 			buildMap();
 		});
 	} else {
@@ -83,8 +82,6 @@ Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIco
 	
 	myIcon += '.png';
 	
-	say(myIcon);
-	
 	var marker = new google.maps.Marker({
         position: latlng,
         map: $self._map,
@@ -125,14 +122,13 @@ Map.prototype.setNativeLocation = function(){
 	var $self = this;
 	var dfd = $.Deferred();
 	var onSuccess = function(position) {
-		say('getting location successful');
 		$self._mapLocation.latitude = position.coords.latitude;
 		$self._mapLocation.longitude = position.coords.longitude;
 		dfd.resolve();
 	};
 	
 	function onError(error) {
-		showAlert('Error getting location!');
+		sem.showAlert('Error getting location!');
 		dfd.resolve();
 	};
 	

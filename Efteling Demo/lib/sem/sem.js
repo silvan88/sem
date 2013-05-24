@@ -17,6 +17,10 @@ function initSem(options){
 	} else {
 		options = defaultOptions;
 	}
+    
+    $(document).bind("mobileinit", function(){
+      $.mobile.defaultPageTransition="none"
+    });
 	
     return document.addEventListener("deviceready", _loadSem(options), false);
 }
