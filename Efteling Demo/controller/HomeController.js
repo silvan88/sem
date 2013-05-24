@@ -18,6 +18,8 @@ var Home = {
 	addSwipeEvent: function(){
 		var $elm = sem.getPlaceholderElm('HomeView');
 		
+		document.ontouchmove = function(e) {e.preventDefault()};
+		
 		sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
 			sem.unbindEvent($elm, 'swipedown');
 			Home.showTopMenu($elm);

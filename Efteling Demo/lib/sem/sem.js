@@ -42,6 +42,7 @@ function _loadSem(options){
 	).done(function(){
 		sem = new Sem_engine(options.eventName);
 		sem.say("SEM initialized, starting SEM...");
+        sem.showAlert('Done loading! Starting SEM');
 		_startSem();
 	});
 }
@@ -52,6 +53,7 @@ function _loadControllers(controllers){
 		$.getScript("controller/"+controller.name+".js");
 		dfd.resolve();
 	});
+    sem.showAlert('Controllers loaded!');
 	return dfd.promise();
 }
 
@@ -61,6 +63,7 @@ function _loadModels(models){
 		$.getScript("model/"+model.name+".js");
 		dfd.resolve();
 	});
+    sem.showAlert('Models loaded!');
 	return dfd.promise();
 }
 
