@@ -59,16 +59,18 @@ var Home = {
     
     showBotMenu: function($elm){
 		var height = $('#homeBottomView').css('height');
+       
+        $('#homeBottomView').css({'margin-top' : '0px'});
 		
 		$elm.transition({y: '-'+height}, 100, 'out', function(){
 			sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
 				sem.unbindEvent($elm, 'swipedown');
-				Home.hideBotMenu($elm, h);
+				Home.hideBotMenu($elm);
 			});
 		});
 	},
 	
-	hideBotMenu: function($elm, h){		
+	hideBotMenu: function($elm){		
 		$elm.transition({y:'0px'}, 100, 'out', function(){
 			Home.setEvents($elm);
 		});
