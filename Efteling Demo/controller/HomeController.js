@@ -45,7 +45,6 @@ var Home = {
 		
 		$elm.transition({y:height}, 100, 'out', function(){
 			sem.addEvent($elm, {event: 'swipeup', max_touches: 0}, function(){
-				sem.say('hide top - swipeup!');
 				sem.unbindEvent($elm, 'swipeup');
 				Home.hideTopMenu($elm);
 			});
@@ -59,15 +58,10 @@ var Home = {
 	},
     
     showBotMenu: function($elm){
-		var height = $('#homeBottomView').css('height').slice(0,-2);
-		var height2 = sem.getWindowSizes().windowHeight;
-
-		var h = height2 - height;
-        $('#homeBottomView').css({'display' : 'block'});
+		var height = $('#homeBottomView').css('height');
 		
-		$elm.transition({y: '-'+height+'px'}, 100, 'out', function(){
+		$elm.transition({y: '-'+height}, 100, 'out', function(){
 			sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
-				sem.say('hide bot - swipedown!');
 				sem.unbindEvent($elm, 'swipedown');
 				Home.hideBotMenu($elm, h);
 			});
