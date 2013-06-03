@@ -29,5 +29,9 @@ var Park = {
 	clickMarker: function($self) {
 		$('#pois-detailScreen').show();
 		$('#pois-detailScreen-'+$self.id).show()
+	},
+	
+	callMe: function(arg1, arg2) {
+		sem.showAlert('para 1: ' + arg1 + ' para 2: ' + arg2 + ' arguments: ' + arguments.length);
 	}
 }

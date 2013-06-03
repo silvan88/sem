@@ -6,7 +6,7 @@ div.page[name='MasterPage'] div.placeholder[name='HomeView'] div.footer div#home
 div.page[name='MasterPage'] div.placeholder[name='HomeView'] div.footer div#homeBottomView input{width:80%;}
 div.page[name='MasterPage'] div.placeholder[name='HomeView'] div.footer div#homeBottomView p{color:white;}
 div.page[name='MasterPage'] div.header[name='MasterPage']{position:relative;width:100%;}
-div.page[name='MasterPage'] div.placeholder{display:none;}div.page[name='MasterPage'] div.placeholder div.body{height:100%;}
+div.page[name='MasterPage'] div.placeholder div.body{height:100%;}
 div#mainHeader{position:absolute;width:100%;z-index:100;padding-top:10px;}
 .home-button{display:inline-block;max-width:25%;}
 #efteling-btn{display:block;max-width:12%;margin:auto;}
