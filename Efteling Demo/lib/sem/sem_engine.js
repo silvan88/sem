@@ -60,7 +60,7 @@ Sem_engine.prototype.registerEvents = function(){
 			$(event.target).removeClass('tappable-active');
 		});
 	}
-	return $(window).on('hashchange', $.proxy($self.route, this));
+	$(window).on('hashchange', $.proxy($self.route, this));
 }
 
 

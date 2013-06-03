@@ -9,7 +9,7 @@ var Poi = {
 	init: function() {	
 		//Start here
 		
-		Poi.render();
+		//Poi.render();
 	},
 	
 	render: function() {

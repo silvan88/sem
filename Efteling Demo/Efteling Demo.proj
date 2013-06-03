@@ -110,6 +110,7 @@
     <Content Include="lib\sem\sem.js" />
     <Content Include="lib\sem\sem_engine.js" />
     <Content Include="view\HomeView.html" />
+    <Content Include="view\MeView.html" />
     <Content Include="view\ParkView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
