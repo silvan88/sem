@@ -12,6 +12,7 @@ Album.prototype.renderAlbum = function() {
 }
 
 Album.prototype.takePicture = function() {
+    sem.showAlert('takePicture');
 	return say('takePicture');
 }
 

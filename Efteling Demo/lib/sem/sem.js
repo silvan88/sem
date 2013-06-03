@@ -1,6 +1,10 @@
 /*! SEM - Smart Event Mobility v0.1 capgemini.com | capgemini.com/sem/license */
 var sem;
 
+/**
+ * Initializes the SEM framework
+ * @param {JSON} options
+ */
 function initSem(options){
 	var defaultOptions = {
 		'eventName': 'SEM event', 
@@ -17,10 +21,6 @@ function initSem(options){
 	} else {
 		options = defaultOptions;
 	}
-    
-    $(document).bind("mobileinit", function(){
-      $.mobile.defaultPageTransition="none"
-    });
 	
     return document.addEventListener("deviceready", _loadSem(options), false);
 }

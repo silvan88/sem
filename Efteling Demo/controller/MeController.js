@@ -13,6 +13,14 @@ var Me = {
 	},
 	
 	render: function() {
-		sem.buildView('MeView');
-	}
+		sem.buildView('MeView', Me.addAlbum);
+	},
+    
+    addAlbum: function() {
+        var Me.album = new Album();
+    },
+    
+    takePicture: function() {
+        Me.album.takePicture();
+    }
 }

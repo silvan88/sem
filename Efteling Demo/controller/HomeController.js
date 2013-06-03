@@ -7,7 +7,6 @@
 var Home = {
 	init: function(){	
 		//Start here
-		
 		Home.render();
 	},
 	
@@ -25,14 +24,12 @@ var Home = {
 	
 	setEvents: function($elm){
 		sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
-			sem.say('show top - swipedown!');
 			sem.unbindEvent($elm, 'swipedown');
 			sem.unbindEvent($elm, 'swipeup');
 			Home.showTopMenu($elm);
 		});
         
         sem.addEvent($elm, {event: 'swipeup', max_touches: 0}, function(){
-			sem.say('show bot - swipeup!');
 			sem.unbindEvent($elm, 'swipedown');
 			sem.unbindEvent($elm, 'swipeup');
 			Home.showBotMenu($elm);
@@ -43,18 +40,21 @@ var Home = {
 		var height = $('#homeTopView').css('height');
 		$('#homeTopView').css({'margin-top' : '-'+height, 'display' : 'block'});
 		
-		$elm.transition({y:height}, 100, 'out', function(){
+		$elm.transition({y:height}, 100, 'in', function(){
 			sem.addEvent($elm, {event: 'swipeup', max_touches: 0}, function(){
 				sem.unbindEvent($elm, 'swipeup');
 				Home.hideTopMenu($elm);
 			});
 		});
+        
+        $('#mainHeader').transition({y:height}, 100, 'in');
 	},
 	
 	hideTopMenu: function($elm){		
-		$elm.transition({y:'0px'}, 100, 'out', function(){
+		$elm.transition({y:'0px'}, 100, 'in', function(){
 			Home.setEvents($elm);
 		});
+        $('#mainHeader').transition({y:'0px'}, 100, 'in');
 	},
     
     showBotMenu: function($elm){
@@ -62,17 +62,21 @@ var Home = {
        
         $('#homeBottomView').css({'margin-top' : '0px'});
 		
-		$elm.transition({y: '-'+height}, 100, 'out', function(){
+		$elm.transition({y: '-'+height}, 100, 'in', function(){
 			sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
 				sem.unbindEvent($elm, 'swipedown');
 				Home.hideBotMenu($elm);
 			});
 		});
+        
+        $('#mainHeader').transition({y:'-'+height}, 100, 'in');
 	},
 	
 	hideBotMenu: function($elm){		
-		$elm.transition({y:'0px'}, 100, 'out', function(){
+		$elm.transition({y:'0px'}, 100, 'in', function(){
 			Home.setEvents($elm);
 		});
+        
+        $('#mainHeader').transition({y:'0px'}, 100, 'in');
 	}
 }

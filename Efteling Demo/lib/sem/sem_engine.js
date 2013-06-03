@@ -124,12 +124,12 @@ Sem_engine.prototype.back = function(){
 	}
 }
 Sem_engine.prototype.route = function(){
-	var hash = window.location.hash;
+	var $self = this, hash = window.location.hash;
+	
 	if (!hash) {
-		sem.goTo('Home', 'init');
-		return;
+		return $self.goTo('Home', 'init');
 	} else {
-		return sem.goTo(hash.slice(1), 'init');
+		return $self.goTo(hash.slice(1), 'init');
 	}
 }
 Sem_engine.prototype.buildView = function(viewName, callback, data){
