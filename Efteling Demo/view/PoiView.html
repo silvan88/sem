@@ -1,0 +1,22 @@
+<script id='tpl-PoiView' type='text/html'>
+    <div class='header'>
+	</div>
+	<div class='body'>
+		{{>tpl-poi}}
+	</div>
+	<div class='footer'>
+	</div>
+</script>
+
+<script id='tpl-poi' type='text/html'>
+	{{#pois}}
+		<div class='poi'>
+			<img class='poi-img' src='{{image}}' />
+			<p>
+				<h2>{{category}}</h2>
+				<h1>{{name}}</h1>
+			</p>
+		</div>
+		<img class='line' src='img/app/poi-list-line.png' />
+	{{/pois}}
+</script>

@@ -11,18 +11,23 @@ var Home = {
 	},
 	
 	render: function(){
-		sem.buildView('HomeView', Home.addSwipeEvent);
+		sem.buildView('HomeView', function(){
+            var $elm = sem.getPlaceholderElm('HomeView');
+            
+            document.ontouchmove = function(e) {e.preventDefault()};
+            Home.setEvents($elm);
+			$('.homeTopView-button').click(function(e){
+				e.preventDefault();
+				Home.hideTopMenu($elm);
+				window.location.hash = $(this).attr('href');
+			});
+        });
 	},
-	
-	addSwipeEvent: function(){
-		document.ontouchmove = function(e) {e.preventDefault()};
 		
-        var $elm = sem.getPlaceholderElm('HomeView');
-		
-		Home.setEvents($elm);
-	},
-	
 	setEvents: function($elm){
+		sem.unbindEvent($elm, 'swipedown');
+		sem.unbindEvent($elm, 'swipeup');
+        
 		sem.addEvent($elm, {event: 'swipedown', max_touches: 0}, function(){
 			sem.unbindEvent($elm, 'swipedown');
 			sem.unbindEvent($elm, 'swipeup');

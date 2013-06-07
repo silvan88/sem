@@ -9,10 +9,12 @@ var Poi = {
 	init: function() {	
 		//Start here
 		
-		//Poi.render();
+		Poi.render();
 	},
 	
 	render: function() {
-		sem.buildView('PoiView');
+		sem.buildView('PoiView', function(){
+			sem.getPlaceholderElm('PoiView').find('.body').css('overflow', 'auto');
+		}, poiModel.getAllPois());
 	}
 }

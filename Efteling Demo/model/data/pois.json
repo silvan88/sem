@@ -1,7 +1,7 @@
 {
 	"pois":	[{
 				"id" : "12",
-				"category" : "attracties",
+				"category" : "attractie",
 				"name" : "Carnaval Festival",
 				"location" : {
 					"latitude" : 51.652347,
@@ -11,7 +11,40 @@
 			},
 			{
 				"id" : "25",
-				"category" : "attracties",
+				"category" : "attractie",
+				"name" : "De Vliegende Hollander",
+				"location" : {
+					"latitude" : 51.647712,
+					"longitude" : 5.051992
+
+				},
+				"members" : null
+			},
+			{
+				"id" : "25",
+				"category" : "attractie",
+				"name" : "De Vliegende Hollander",
+				"location" : {
+					"latitude" : 51.647712,
+					"longitude" : 5.051992
+
+				},
+				"members" : null
+			},
+			{
+				"id" : "25",
+				"category" : "attractie",
+				"name" : "De Vliegende Hollander",
+				"location" : {
+					"latitude" : 51.647712,
+					"longitude" : 5.051992
+
+				},
+				"members" : null
+			},
+			{
+				"id" : "25",
+				"category" : "attractie",
 				"name" : "De Vliegende Hollander",
 				"location" : {
 					"latitude" : 51.647712,

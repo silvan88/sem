@@ -7,7 +7,8 @@
 
 var Park = {
 	init: function() {	
-		poiModel = new PoiModel(Park.render);
+		//poiModel = new PoiModel(Park.render);
+		Park.render();
 	},
 	
 	render: function() {

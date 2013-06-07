@@ -45,7 +45,7 @@ function _loadSem(options){
 	    })
 	).done(function(){
 		sem = new Sem_engine(options.eventName);
-		_startSem(options.controllers);
+		_startSem(options.models, options.controllers);
 	});
 }
 
@@ -75,12 +75,17 @@ function _loadModels(models){
 	return dfd.promise();
 }
 
-function _startSem(controllers){
+function _startSem(models, controllers){
 	sem.registerEvents();
 	sem.setWindowSizes();
+	//for(var i = 0; i<models.length; i++) {
+		poiModel = new PoiModel(function(){
+		
 	for(var i = 0; i<controllers.length; i++) {
 		window[controllers[i].name.replace('Controller', '')].init();
 	}
+		});
+	//}
 	//Call home controller
 	//Home.init();
 	//sem.show('Home');

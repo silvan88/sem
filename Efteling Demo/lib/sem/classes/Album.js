@@ -1,14 +1,6 @@
 Album = function() {
-	/*this._name;
+	this._name;
 	this._pictures = {};
-	this._pictureOptions = {
-		quality : 75, 
-		destinationType : Camera.DestinationType.DATA_URL, 
-		sourceType : Camera.PictureSourceType.CAMERA, 
-		allowEdit : false,
-		encodingType: Camera.EncodingType.JPEG,
-		saveToPhotoAlbum: true
-	};*/
 }
 
 Album.prototype.initAlbum = function() {
@@ -19,26 +11,41 @@ Album.prototype.renderAlbum = function() {
 	return sem.say('renderAlbum');
 }
 
-Album.prototype.takePicture = function() {
+Album.prototype.takePicture = function(callback) {
 	var $self = this;
 	
-	if(!navigator.camera) {
+    if(!navigator.camera) {
 		sem.showAlert("Camera not supported on this device...", "Error");
         return;
 	}
 	
-	navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, $self._pictureOptions);
-	
-	onPhotoSuccess = function(){
-		var $elm = sem.getPlaceholderElm('Me');
-		$elm.css('background-image', "url('data:image/jpeg;base64," + imageData + "')");
-	}
-	
-	onPhotoFail = function(){
-		sem.showAlert('Error taking picture', 'Error');
+	$self._pictureOptions = {
+		quality : 75, 
+		destinationType : Camera.DestinationType.DATA_URL, 
+		sourceType : Camera.PictureSourceType.CAMERA, 
+		allowEdit : false,
+		encodingType: Camera.EncodingType.JPEG,
+		saveToPhotoAlbum: false
 	};
 	
-	return sem.showAlert('DONE');
+	function onPhotoSuccess(imageData){
+        var obj = {
+            'imageData' : imageData,
+            'url' : "data:image/jpeg;base64," + imageData
+        };
+        
+        if (callback && typeof(callback) === "function") {
+            return callback(obj);
+        }
+	};
+	
+	function onPhotoFail(){
+		if (callback && typeof(callback) === "function") {
+            return callback('false');
+        }
+	};
+	
+	navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, $self._pictureOptions);
 }
 
 Album.prototype.addPicture = function() {

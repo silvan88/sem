@@ -23,9 +23,9 @@ Map.prototype.renderMap = function(placeholderName) {
 }
 Map.prototype.initMap = function(){
 	google.maps.visualRefresh = true;
-	
+
 	var $self = this;
-	
+
 	if($self._mapLocation.latitude == undefined){
 		$.when($self.setLocation()).done(function(){
 			buildMap();
@@ -33,26 +33,28 @@ Map.prototype.initMap = function(){
 	} else {
 		buildMap();
 	}
-	
+
 	function buildMap(){
 		$self.setGoogleMapsOptionsCenter($self._mapLocation);
 		$self._GoogleMapsOptions.disableDefaultUI = true;
 		$self.setGoogleMapsOptionsMapTypeId($self._mapType);
+
+		// [oliver] directe referentie naar de view, is eigenlijk niet de bedoeling...
 		$self._map = new google.maps.Map(document.getElementById("map-canvas"), $self._GoogleMapsOptions);
-		
+
 		google.maps.event.addListener($self._map, 'click', function() {
 			$self._infowindow.close();
 		});
-		
+
 		$self._infowindow = new google.maps.InfoWindow({
 			size: new google.maps.Size(150, 50)
 		});
-		
+
 		$.each($self._poiList, function(nr, obj){
 			$self.createMarker(obj.location.latitude, obj.location.longitude, obj.name, obj.id, $self._poiMarkerOptions);
 		});
-				
-		return $('#map-canvas').height(getWindowSizes().windowHeight);
+
+		return $('#map-canvas').height(sem.getWindowSizes().windowHeight);
 	}
 }
 
@@ -65,23 +67,23 @@ Map.prototype.getPoiMarkers = function() {
 }
 Map.prototype.setPoiMarkers = function(data, onclick) {
 	this._poiOnclick = onclick;
-	return this._poiList = data.pois;	
+	return this._poiList = data.pois;
 }
 Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIconOptions) {
 	var $self = this, contentString = myTitle, latlng = new google.maps.LatLng(latitude, longitude), icon = '';
-	
+
 	if(myIconOptions.marker == 'default'){
 		myIcon = 'lib/sem/res/map/poi_marker_grey';
 	} else {
 		myIcon = myIconOptions.marker;
 	}
-	
+
 	if(myIconOptions.shadow == 'yes'){
 		myIcon += '_shadow';
 	}
-	
+
 	myIcon += '.png';
-	
+
 	var marker = new google.maps.Marker({
         position: latlng,
         map: $self._map,
@@ -94,7 +96,7 @@ Map.prototype.createMarker = function(latitude, longitude, myTitle, myNum, myIco
     google.maps.event.addListener(marker, 'click', function() {
         //$self._infowindow.setContent(contentString);
         //$self._infowindow.open($self._map, marker);
-		
+
 		$self._poiOnclick(this);
     });
 
@@ -126,12 +128,12 @@ Map.prototype.setNativeLocation = function(){
 		$self._mapLocation.longitude = position.coords.longitude;
 		dfd.resolve();
 	};
-	
+
 	function onError(error) {
 		sem.showAlert('Error getting location!');
 		dfd.resolve();
 	};
-	
+
 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	return dfd.promise();
 };
@@ -154,6 +156,8 @@ Map.prototype.setGoogleMapsOptionsCenter = function(location) {
 	return this._GoogleMapsOptions.center = gCenter;
 }
 Map.prototype.setGoogleMapsOptionsMapTypeId = function(mapType) {
+	// [oliver] je kunt beter dit doen:
+	//     return this._GoogleMapsOptions.mapTypeId = google.maps.MapTypeId[mapType.toUpperCase()];
 	gMapTypeId = 'google.maps.MapTypeId.'+mapType.toUpperCase();
 	return this._GoogleMapsOptions.mapTypeId = eval(gMapTypeId);
 }

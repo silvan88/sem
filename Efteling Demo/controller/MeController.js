@@ -9,19 +9,22 @@
 var Me = {
 	init: function() {	
 		//Start here
-		
+		Me.album = new Album();
 		Me.render();
 	},
 	
 	render: function() {
-		sem.buildView('MeView', Me.addAlbum);
+		sem.buildView('MeView');
 	},
-    
-    addAlbum: function() {
-        Me.album = new Album();
-    },
-    
+        
     takePicture: function() {
-        Me.album.takePicture();
+        Me.album.takePicture(function(data){
+            if(data){
+                sem.getPlaceholderElm('MeView').css('background-image', 'url("' + data.url + '")');
+                sem.show('MeView');
+            } else {
+                sem.showAlert(data);
+            }
+        });
     }
 }

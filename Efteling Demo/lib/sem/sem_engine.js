@@ -60,7 +60,7 @@ Sem_engine.prototype.registerEvents = function(){
 			$(event.target).removeClass('tappable-active');
 		});
 	}
-	$(window).on('hashchange', $.proxy($self.route, this));
+	return $(window).on('hashchange', $.proxy($self.route, this));
 }
 
 
@@ -108,7 +108,7 @@ Sem_engine.prototype.extend = function(ChildClass, ParentClass){
 /* Navigation */
 Sem_engine.prototype.route = function(){
 	var $self = this, hash = window.location.hash, route;
-    
+
 	if (!hash) {
 		return $self.goTo('Home', 'init');
 	} else {
@@ -119,7 +119,7 @@ Sem_engine.prototype.route = function(){
 
 Sem_engine.prototype.goTo = function(controller, action, parameters){
 	var $self = this;
-    
+	
 	if(!action){
 		//window[controller].init();
 		$self.show(controller + 'View');
