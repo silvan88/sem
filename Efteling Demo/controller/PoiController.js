@@ -14,7 +14,9 @@ var Poi = {
 	
 	render: function() {
 		sem.buildView('PoiView', function(){
-			sem.getPlaceholderElm('PoiView').find('.body').css('overflow', 'auto');
+            //sem.getPlaceholderElm('PoiView').css({overflow : 'scroll'});
+            //sem.getPlaceholderElm('PoiView').ontouchmove = true;
+
 		}, poiModel.getAllPois());
 	}
 }

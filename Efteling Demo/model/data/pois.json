@@ -9,14 +9,33 @@
 				},
 				"members" : null
 			},
-			{
-				"id" : "25",
+            {
+				"id" : "12",
 				"category" : "attractie",
-				"name" : "De Vliegende Hollander",
+				"name" : "Carnaval Festival",
 				"location" : {
-					"latitude" : 51.647712,
-					"longitude" : 5.051992
-
+					"latitude" : 51.652347,
+					"longitude" : 5.052316 
+				},
+				"members" : null
+			},
+            {
+				"id" : "12",
+				"category" : "attractie",
+				"name" : "Carnaval Festival",
+				"location" : {
+					"latitude" : 51.652347,
+					"longitude" : 5.052316 
+				},
+				"members" : null
+			},
+            {
+				"id" : "12",
+				"category" : "attractie",
+				"name" : "Carnaval Festival",
+				"location" : {
+					"latitude" : 51.652347,
+					"longitude" : 5.052316 
 				},
 				"members" : null
 			},
@@ -50,6 +69,47 @@
 					"latitude" : 51.647712,
 					"longitude" : 5.051992
 
+				},
+				"members" : null
+			},
+			{
+				"id" : "25",
+				"category" : "attractie",
+				"name" : "De Vliegende Hollander",
+				"location" : {
+					"latitude" : 51.647712,
+					"longitude" : 5.051992
+
+				},
+				"members" : null
+			},
+			{
+				"id" : "c6",
+				"category" : "eten en drinken",
+				"name" : "De Steenbok",
+				"location" : {
+					"latitude" : 51.648158,
+					"longitude" : 5.046552
+				},
+				"members" : null
+			},
+			{
+				"id" : "c6",
+				"category" : "eten en drinken",
+				"name" : "De Steenbok",
+				"location" : {
+					"latitude" : 51.648158,
+					"longitude" : 5.046552
+				},
+				"members" : null
+			},
+			{
+				"id" : "c6",
+				"category" : "eten en drinken",
+				"name" : "De Steenbok",
+				"location" : {
+					"latitude" : 51.648158,
+					"longitude" : 5.046552
 				},
 				"members" : null
 			},

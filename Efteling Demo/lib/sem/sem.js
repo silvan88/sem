@@ -80,10 +80,9 @@ function _startSem(models, controllers){
 	sem.setWindowSizes();
 	//for(var i = 0; i<models.length; i++) {
 		poiModel = new PoiModel(function(){
-		
-	for(var i = 0; i<controllers.length; i++) {
-		window[controllers[i].name.replace('Controller', '')].init();
-	}
+			for(var i = 0; i<controllers.length; i++) {
+				window[controllers[i].name.replace('Controller', '')].init();
+			}
 		});
 	//}
 	//Call home controller

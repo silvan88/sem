@@ -42,24 +42,7 @@ Sem_engine.prototype.unbindEvent = function($elm, event){
 
 Sem_engine.prototype.registerEvents = function(){
 	var $self = this;
-	// Check of browser supports touch events...
-	if (document.documentElement.hasOwnProperty('ontouchstart')) {
-		// ... if yes: register touch event listener to change the "selected" state of the item
-		$('body').on('touchstart', 'a', function(event) {
-			$(event.target).addClass('tappable-active');
-		});
-		$('body').on('touchend', 'a', function(event) {
-			$(event.target).removeClass('tappable-active');
-		});
-	} else {
-		// ... if not: register mouse events instead
-		$('body').on('mousedown', 'a', function(event) {
-			$(event.target).addClass('tappable-active');
-		});
-		$('body').on('mouseup', 'a', function(event) {
-			$(event.target).removeClass('tappable-active');
-		});
-	}
+	
 	return $(window).on('hashchange', $.proxy($self.route, this));
 }
 
@@ -178,7 +161,7 @@ Sem_engine.prototype.buildView = function(viewName, callback, data){
 		//$self.getPlaceholderElm(viewName).show();
 	}
 
-	return $('div.placeholder').height($self.getWindowSizes().windowHeight);
+	return $('div.placeholder').css("height", $self.getWindowSizes().windowHeight);
 }
 
 Sem_engine.prototype.getPlaceholders = function(){
