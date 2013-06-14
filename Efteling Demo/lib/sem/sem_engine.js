@@ -43,6 +43,11 @@ Sem_engine.prototype.unbindEvent = function($elm, event){
 Sem_engine.prototype.registerEvents = function(){
 	var $self = this;
 	
+	$('a').hammer().on("tap", function(e) {
+		e.preventDefault();
+        window.location = $(this).attr('href');
+    });
+	
 	return $(window).on('hashchange', $.proxy($self.route, this));
 }
 
